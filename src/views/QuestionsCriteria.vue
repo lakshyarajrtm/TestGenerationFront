@@ -1,8 +1,14 @@
 
 <template>
-<div>
+<div class="main-div">
     <div class="question-criteria">
-        <label>Skill</label><input type="text" v-model="skill"/><br/>
+        <label>Test Paper Name</label><input type="text" v-model='testPaperName'/><br/>
+        <label>Skill</label>
+        <select v-model="skill" id="s3">
+            <option value="csharp">C#</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
+        </select><br/>
         <label>Difficulty Level</label>
         <select v-model="difficultyLevel" id="s1">
             <option value=0>Easy</option>
@@ -16,19 +22,16 @@
             <option value=2>Senior-Level</option>
         </select><br/>
         <label>Number of Questions</label><input type="text" v-model="numOfQuest" /><br/><br/>
+        <label>Duration: </label>
+        <div class="duration" style="display:inline-block">
+            <label style="width:30px;">Hr</label><input type="text" v-model="DurationHour" style="width:80px"/>
+            <lable style="margin-left: 40px;padding-right: 10px;">Min</lable><input type="text" v-model="DurationMinute" style="width:80px"/>
+        </div><br/>
         <button id = 'generate-btn' class="btn" @click="getQuestion()">Generate Questions</button>
     
     </div>
-    <div class="display-question" v-if="displayQuestion">
-
-        <div class="questions-div" v-for="questions in randomQuestions.value" v-bind:key="questions.questionId">
-            <p>{{ question.problemStatement }}</p>
-            <label>question.options[0]</label>
-            <label>question.options[1]</label>
-            <label>question.options[2]</label>
-            <label>question.options[3]</label>
-        </div>
-    </div>
+    
+    
 
 </div>
 
@@ -45,6 +48,9 @@ const skill = ref('')
 const difficultyLevel = ref(0)
 const roleType = ref(0)
 const numOfQuest = ref(0)
+const testPaperName = ref('')
+const DurationHour = ref('')
+const DurationMinute = ref('')
 
 const randomQuestions = ref([])
 const router = useRouter()
@@ -97,12 +103,14 @@ const getQuestion = async () => {
     {
         displayQuestion.value = true;
     } 
-    console.log(res)
+    
 
     window.randomQuestions =  await res.data
+    window.testPaperName = testPaperName
+    window.DurationHour = DurationHour
+    window.DurationMinute = DurationMinute
     
-    console.log(randomQuestions.value)
-    console.log(displayQuestion.value)
+    console.log(randomQuestions)
 
     router.push('/randomQuestions')
 }
@@ -112,20 +120,36 @@ const getQuestion = async () => {
 <style>
 
 .question-criteria{
+
     position: relative;
-    background:rgb(0, 0, 0,.5);
+    background:rgb(229, 229, 229);
     padding:2% 0 2% 10%;
     margin-top:2%;
     border-radius: 5px;
     width:80%;
     left: 10%;
+    border: 1px solid rgb(164, 164, 164);
 }
 
 #generate-btn{
+
     width:400px;
     text-align: center;
     position: relative;
     left:28%;
+    top:20px;
+}
+
+.link-div{
+    position: absolute;
+    width: 50px;
+    top:15%;
+    left:93%;
+}
+
+.main-div{
+    width: auto;
+    height: 750px;
 }
 
 </style>
