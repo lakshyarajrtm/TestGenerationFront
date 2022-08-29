@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	</div>
-    <div class="card w-96 base-100 shadow-xl">
+    <div class="card w-96 base-100 shadow-xl" id="card-one">
         <div class="card-body">
             <h2 class="card-title">Add Questions</h2>
             <p>Add questions to the database</p>
@@ -26,6 +26,13 @@
 
 </div>
 </template>
+<style>
+#class-one{
+    height: 200px;
+}
+
+</style>
+
 
 <script setup>
 //import { useRouter } from 'vue-router';

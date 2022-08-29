@@ -2,9 +2,9 @@
 <template>
 <div class="main-div">
     <div class="question-criteria">
-        <label>Test Paper Name</label><input type="text" v-model='testPaperName'/><br/>
+        <label>Test Paper Name</label><input type="text" v-model='testPaperName' required/><br/>
         <label>Skill</label>
-        <select v-model="skill" id="s3">
+        <select v-model="skill" id="s3" required>
             <option value="csharp">C#</option>
             <option value="java">Java</option>
             <option value="python">Python</option>
@@ -21,16 +21,16 @@
             <option value=1>Mid-Level</option>
             <option value=2>Senior-Level</option>
         </select><br/>
-        <label>Number of Questions</label><input type="text" v-model="numOfQuest" /><br/><br/>
+        <label>Number of Questions</label><input type="text" v-model="numOfQuest" required/><br/><br/>
         <label>Duration: </label>
         <div class="duration" style="display:inline-block">
-            <label style="width:30px;">Hr</label><input type="text" v-model="DurationHour" style="width:80px"/>
-            <lable style="margin-left: 40px;padding-right: 10px;">Min</lable><input type="text" v-model="DurationMinute" style="width:80px"/>
+            <label style="width:30px;position: relative;top:0ex;">Hr</label>
+            <input type="text" v-model="DurationHour" style="width:80px" required/>
+            <label style="margin-left: 40px;padding-right: 10px;top:0ex;width: 35px;">Min</label>
+            <input type="text" v-model="DurationMinute" style="width:80px" required/>
         </div><br/>
-        <button id = 'generate-btn' class="btn" @click="getQuestion()">Generate Questions</button>
-    
+        <button id='generate-btn' class="btn btn1" @click="getQuestion" >Get Question</button>
     </div>
-    
     
 
 </div>
@@ -136,7 +136,7 @@ const getQuestion = async () => {
     width:400px;
     text-align: center;
     position: relative;
-    left:28%;
+    left: 8%;
     top:20px;
 }
 
